@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-let teamSChema = mongoose.Schema({
+let teamSChema = new mongoose.Schema({
     teamName: {
         type: String,
         required: [true, 'name cannot be empty']
@@ -18,6 +19,6 @@ let teamSChema = mongoose.Schema({
     timestamps: true
 })
 
-let team = mongoose.model('teams', userSchema)
+let team = mongoose.model('teams', teamSChema)
 
 module.exports = team

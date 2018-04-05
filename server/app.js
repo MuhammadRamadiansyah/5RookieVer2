@@ -4,11 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var request = require('request');
+const mongoose =require ('mongoose')
+mongoose.connect('mongodb://localhost/db_rookie_ver2');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
-
+var team = require('./routes/team');
 var app = express();
 
 // view engine setup
@@ -24,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/steam', steamRouter)
-
+app.use('/team',team)
 
 
 // catch 404 and forward to error handler
