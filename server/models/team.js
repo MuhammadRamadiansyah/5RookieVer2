@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const Schema  = mongoose.Schema
+const Schema = mongoose.Schema
 
-let teamSChema = new Schema({
+let teamSChema = new mongoose.Schema({
     teamName: {
         type: String,
         required: [true, 'name cannot be empty']
