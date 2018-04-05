@@ -6,6 +6,7 @@ const inviteController = require('../controllers/invitation.controller')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('tee')
   res.render('index', { title: 'Express' });
 });
 

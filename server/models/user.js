@@ -21,7 +21,7 @@ let userSchema = mongoose.Schema({
         type: String,
         required: [true, 'stock cannot be empty']
     },
-    usernameSteam: {
+    dotaId: {
         type: String,
         required: [true, 'usernameSteam cannot be empty'] 
     }

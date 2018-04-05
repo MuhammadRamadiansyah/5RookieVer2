@@ -3,9 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+const cors = require('cors')
+require('dotenv').config()
 var request = require('request');
 
-var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
@@ -35,8 +37,6 @@ app.use('/users', usersRouter)
 app.use('/steam', steamRouter)
 app.use('/dota', dotaRouter)
 app.use('/team',team)
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

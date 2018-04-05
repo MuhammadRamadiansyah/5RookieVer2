@@ -63,26 +63,40 @@
     crossorigin="anonymous"></script>
 
     <script>
-        axios.get('http://localhost:3000/steam/getProfile/76561198065514372')
-        .then(function(success){
-            let imgSrc = success.data.response.players[0].avatarfull
-            let nick = success.data.response.players[0].personaname
-            $("#avatar").attr("src", imgSrc)
-            $("#nickname").text(nick)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-        axios.get('http://localhost:3000/dota/getDotaProfile/105248644')
-        .then(function(success){
-            let mmr = success.data.mmr_estimate.estimate
-            let leaderboard_rank = success.data.leaderboard_rank
-            $("#mmr").text(mmr)
-            $("#leaderboardRank").text(leaderboard_rank)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
+
+        let token = localStorage.getItem('token')
+        axios.post("http://localhost:3000/users/token", {}, {headers: {token:token}})
+             .then(function(response){
+                 let dotaId = response.data.result.dotaId
+                 axios.get(`http://localhost:3000/dota/getDotaProfile/${dotaId}`)
+                    .then(function(success){
+                        let mmr = success.data.mmr_estimate.estimate
+                        let leaderboard_rank = success.data.leaderboard_rank
+                        $("#mmr").text(mmr)
+                        $("#leaderboardRank").text(leaderboard_rank)
+                        let steamId =success.data.profile.steamid
+
+                        axios.get(`http://localhost:3000/steam/getProfile/${steamId}`)
+                            .then(function(success){
+                                let imgSrc = success.data.response.players[0].avatarfull
+                                let nick = success.data.response.players[0].personaname
+                                $("#avatar").attr("src", imgSrc)
+                                $("#nickname").text(nick)
+                            })
+                            .catch(function(err){
+                                console.log(err)
+                            })   
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+             })
+             .catch(err=>{
+                 console.log(err)
+             })
+        
+        // let dotaId = localStorage.getItem('token').
+        
     </script>
 </body>
 </html>
