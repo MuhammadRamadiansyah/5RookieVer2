@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
 
+require('dotenv').config()
+
 var app = express();
 
 // view engine setup
