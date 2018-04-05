@@ -6,15 +6,6 @@ const SteamUser = require('node-steam-user');
  var client = new Steam.SteamClient();
  Steam.SteamUser = new SteamUser(client);
 
-var oauth = new OAuth.OAuth(
-    'https://api.twitter.com/oauth/request_token',
-    'https://api.twitter.com/oauth/access_token',
-    process.env.CONSUMER_KEY,
-    process.env.CONSUMER_SECRET,
-    '1.0A',
-    null,
-    'HMAC-SHA1'
-)
 
 module.exports = {
    
