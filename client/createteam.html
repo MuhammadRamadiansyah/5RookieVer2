@@ -29,7 +29,7 @@
         </div>
         
     <div class="container">
-        <form action="/action_page.php">
+        <form action="./myteams.html">
             <label for="pwd">Your team name: </label>
             <input type="text" class="form-control" id="teamName">
           
@@ -63,6 +63,7 @@ function submitData(){
   })
   .then(function (response) {
      console.log(response);
+     window.location.href="myteams.html" ;
   })
   .catch(function (error) {
      console.log(error);

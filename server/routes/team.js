@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const {getAll,add}  = require('../controllers/team.controller')
-=======
-const {getAll,add,getOne}  = require('../controllers/teamController')
->>>>>>> team
+const {getAll,add,getOne}  = require('../controllers/team.controller')
 const express = require('express');
 const router = express.Router()
 

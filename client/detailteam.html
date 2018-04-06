@@ -12,13 +12,6 @@
 
 <body>
 
-<<<<<<< HEAD
-  <div class="container">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">5 Rookie</a>
-=======
     <div class="container">
             <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
@@ -35,16 +28,9 @@
                         </ul>
                     </div>
             </nav>
->>>>>>> team
         </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">My Teams</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-        </ul>
+       
+       
       </div>
     </nav>
   </div>
@@ -54,8 +40,6 @@
             <p class="font-weight-bold">
                 Your Team Members
             </p>
-<<<<<<< HEAD
-=======
             
             <ul id="myList" class="list-group" >
            
@@ -65,16 +49,18 @@
                     axios.get('http://localhost:3000/team/'+localStorage.getItem('idteam'))
                   .then(response => {
                     let ul = document.querySelector('ul')
-                    //  response.data.data.forEach(datanew=>{
+
+                     response.data.data.teamMember.forEach(datanew=>{
                       //  console.log(data)
-                        // ul.append('<li>'+datanew.teamName+'</li>')
+                        // ul.append('<li>'+datanew.teamName+'</li>')\
+                        console.log(response)
                         var node = document.createElement("LI");     
                                     // Create a <li> node
                         node.classList.add("list-group-item")                
-                        var textnode = document.createTextNode(response.data.data.teamName);         // Create a text node
+                        var textnode = document.createTextNode(datanew.name);         // Create a text node
                         node.appendChild(textnode);                              // Append the text to <li>
                         document.getElementById("myList").appendChild(node); 
-                    //  })
+                     })
                   })
                   .catch( (error)=> {
                     console.log(error);
@@ -132,7 +118,6 @@
                 <li class="list-group-item">Position 5: Bong</li>
         </ul>
     </div>
->>>>>>> team
 
             <ul id="myList" class="list-group" >
 
@@ -193,23 +178,7 @@
       .catch(err => {
         console.log(err)
       })
-    axios.get('http://localhost:3000/team')
-      .then(response => {
-        let ul = document.querySelector('ul')
-        response.data.data.forEach(datanew => {
-          //  console.log(data)
-          // ul.append('<li>'+datanew.teamName+'</li>')
-          var node = document.createElement("LI");
-          // Create a <li> node
-          node.classList.add("list-group-item")
-          var textnode = document.createTextNode(datanew.teamName); // Create a text node
-          node.appendChild(textnode); // Append the text to <li>
-          document.getElementById("myList").appendChild(node);
-        })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    
   </script>
 </body>
 

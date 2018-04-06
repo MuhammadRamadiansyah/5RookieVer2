@@ -1,21 +1,17 @@
 const Team = require('../models/team')
-
+const User = require('../models/user')
 
 module.exports = {
 
 getAll : function(req,res){
 
     Team.find()
-    .populate('user')
+    .populate('User')
     .exec().then(response=>{
         res.status(200).json({
         message : 'success get data',
-<<<<<<< HEAD:server/controllers/team.controller.js
-        data : response
-=======
         data : response  
 
->>>>>>> team:server/controllers/teamController.js
     })
     }).catch(err=>{
         res.status(500).json({
@@ -26,8 +22,10 @@ getAll : function(req,res){
     },
 
     getOne : function(req,res){
-      Team.findById(req.params.id).exec().then(response=>{
-        console.log(req.body);
+      Team.findById(req.params.id)
+      .populate('teamMember')
+      .exec().then(response=>{
+        
         
         res.status(200).json({
           message : 'success get data by id',
