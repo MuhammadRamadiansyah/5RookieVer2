@@ -1,0 +1,28 @@
+{
+  "name": "5rookiev2",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./server/bin/www"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "fb": "^2.0.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.2.1",
+    "long": "^4.0.0",
+    "mongoose": "^5.0.13",
+    "morgan": "~1.9.0",
+    "node-steam": "0.0.1",
+    "node-steam-user": "0.0.3",
+    "oauth": "^0.9.15",
+    "request": "^2.85.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>5 Rookie</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container ">
+    <div class="page-header">
+      <h1>5Rookie <small>transforming 5 Rookies into 5 Pros</small></h1>
+    </div>
+
+
+    <label for="pwd">Dota ID: </label>
+    <input type="text" class="form-control" id="dotaId" name="dota_id">
+    <form>
+      <label for="pwd">Position :</label>
+      <select name="position">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+      <button type="button" class="btn btn-default" onclick="toSubmitData()">Submit</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("button").click(function() {
+          let getDotaId = $('[name="dota_id"]').val()
+          let getPosition = $("select[name='position']").val()
+          let token = localStorage.getItem('token')
+          axios.post('http://localhost:3000/users/register', {
+              dotaId: getDotaId,
+              position: getPosition
+            }, {
+              headers: {
+                token: token
+              }
+            })
+            .then(function(response) {
+              console.log(response)
+              window.location.href = "home.html"
+            })
+            .catch(function(err) {
+              console.log(err)
+            })
+        });
+      });
+
+      function toSubmitData() {
+        let token = localStorage.getItem('token');
+        let id = $('#dotaId').val()
+        let position = $('#position').val()
+        axios.get(`https://api.opendota.com/api/players/88018`)
+          .then(response => {
+            axios.post('http://localhost:3000/users/register', {
+                data: response.data,
+                id: token,
+                position: position
+              })
+              .then(res => {
+                console.log(res)
+              }).catch(err => {
+                console.log(err)
+              })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    </script>
+</body>
+
+</html>

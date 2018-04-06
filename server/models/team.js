@@ -1,23 +1,23 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-let teamSChema = mongoose.Schema({
+let teamSChema = new mongoose.Schema({
     teamName: {
         type: String,
         required: [true, 'name cannot be empty']
     },
     captain: {
         type: String, //e.g: 1,2,3,4,5
-        required: [true, 'position cannot be empty']
+        // required: [true, 'position cannot be empty']
     },
-    teamMember: [{ 
+    teamMember: [{
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "Users"
     }]
-
 },{
     timestamps: true
 })
 
-let team = mongoose.model('teams', userSchema)
+let Team = mongoose.model('Teams', teamSChema)
 
-module.exports = team
+module.exports = Team

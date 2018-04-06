@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    </head>
+    <body>
+
+    <div class="container">
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                        <a class="navbar-brand">5 Rookie</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                        <li class="active"><a href="./home.html">Home</a></li>
+                        <li><a href="./myteams.html">My Teams</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                        </ul>
+                    </div>
+            </nav>
+        </div>
+
+        <div class="container">
+            <a href="./createteam.html" class="btn btn-warning">create your team here</a>
+            <h3>Your Teams</h3> 
+            <!-- <ul class="list-group">
+                <li class="list-group-item">D Jakarta</li>
+                <li class="list-group-item">Quantum</li>
+                <li class="list-group-item">Fox</li>
+            </ul> -->
+
+            <ul id="myList" class="list-group" >
+           
+            </ul>
+                <script>
+    
+                axios.get('http://localhost:3000/team')
+                .then(response => {
+                    let ul = document.querySelector('ul')
+                    response.data.data.forEach(datanew=>{
+                          //  console.log(data)
+                            // ul.append('<li>'+datanew.teamName+'</li>')
+                    var node = document.createElement("LI");     
+                                        // Create a <li> node
+                     var newBaitTag = document.createElement('a');                        
+                    node.classList.add("list-group-item")                
+                    var textnode = document.createTextNode(datanew.teamName);         // Create a text node
+                   
+                    newBaitTag.setAttribute('href', "./detailteam.html");
+                    newBaitTag.onclick = function() {
+                        localStorage.setItem('idteam',datanew._id)
+                    };
+  
+                    newBaitTag.appendChild(textnode);   
+                   
+                    node.appendChild(newBaitTag);                              // Append the text to <li>
+                    document.getElementById("myList").appendChild(node);                    
+                    })
+                 })
+                .catch( (error)=> {
+                    console.log(error);
+                });
+
+               
+                </script>     
+        </div>
+
+    </body>
+</html>

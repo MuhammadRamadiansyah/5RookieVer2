@@ -1,13 +1,14 @@
 const mongoose = require('mongoose')
+const Schema  = mongoose.Schema
 
-let invitationSchema = mongoose.Schema({
-    teamId: { 
+let invitationSchema = new Schema({
+    teamId: {
         type: Schema.Types.ObjectId,
-        ref: "teams"
+        ref: "Teams"
     },
     userId: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "Users"
     },
     status: {
         type: String,
@@ -17,6 +18,6 @@ let invitationSchema = mongoose.Schema({
     timestamps: true
 })
 
-let invitation = mongoose.model('inivtations', userSchema)
+let invitation = mongoose.model('Invitations', invitationSchema)
 
 module.exports = invitation
