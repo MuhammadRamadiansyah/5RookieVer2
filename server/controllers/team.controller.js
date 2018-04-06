@@ -3,10 +3,9 @@ const User = require('../models/user')
 
 module.exports = {
 
-getAll : function(req,res){
+  getAll: function(req, res) {
 
     Team.find()
-    .populate('User')
     .exec().then(response=>{
         res.status(200).json({
         message : 'success get data',
@@ -15,11 +14,11 @@ getAll : function(req,res){
     })
     }).catch(err=>{
         res.status(500).json({
-        message : 'get data failed',
-        err
-          })
+          message: 'get data failed',
+          err
         })
-    },
+      })
+  },
 
     getOne : function(req,res){
       Team.findById(req.params.id)
@@ -40,24 +39,24 @@ getAll : function(req,res){
     },
 
 
-add : function(req,res){
+  add: function(req, res) {
 
     let newTeam = new Team({
-      teamName : req.body.teamName,
-      // captain : req.body.captain,
-      // author : req.body.author,
-      // category : req.body.category,
-      // stock : req.body.stock,
+      teamName: req.body.teamName,
+      captain: req.body.captain,
+      author: req.body.author,
+      category: req.body.category,
+      stock: req.body.stock,
     })
 
-    newTeam.save().then(response=>{
+    Team.save().then(response => {
       res.status(200).json({
-        message : 'success insert data',
-        data : response
+        message: 'success insert data',
+        data: response
       })
-    }).catch(err=>{
+    }).catch(err => {
       res.status(500).json({
-        message : 'insert error',
+        message: 'insert error',
         err
       })
     })

@@ -7,7 +7,8 @@ var logger = require('morgan');
 const cors = require('cors')
 require('dotenv').config()
 var request = require('request');
-require('dotenv').config()
+
+const User = require('./models/user')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
@@ -15,7 +16,7 @@ var dotaRouter = require('./routes/dota')
 const mongoose =require ('mongoose')
 mongoose.connect('mongodb://localhost/db_rookie_ver2');
 
-require('dotenv').load()
+require('dotenv').config()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
