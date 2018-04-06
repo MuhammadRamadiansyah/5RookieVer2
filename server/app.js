@@ -13,7 +13,7 @@ var cors = require('cors')
 const mongoose =require ('mongoose')
 mongoose.connect('mongodb://localhost/db_rookie_ver2');
 
-require('dotenv').config()
+require('dotenv').load()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
