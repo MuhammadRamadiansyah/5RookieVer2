@@ -1,88 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
+
 <body>
-    <div class="container">
-        <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                    <a class="navbar-brand">5 Rookie</a>
-                    </div>
-                    <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">My Teams</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" id="loginUser"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                    </ul>
-                </div>
-        </nav>
+  <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">5 Rookie</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">My Teams</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" id="loginUser"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="alert alert-success">
+      <strong>Team Liquid </strong> invites you to play
+      <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
     </div>
-
-    <div class="container">
-        <div class="alert alert-success">
-            <strong>Team Liquid </strong> invites you to play
-            <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
-         </div>
-         <div class="alert alert-success">
-                <strong>Team Liquid </strong> invites you to play
-                <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
-        </div>
-        <div class="alert alert-success">
-            <strong>Team Liquid </strong> invites you to play
-            <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a> 
-        </div>
+    <div class="alert alert-success">
+      <strong>Team Liquid </strong> invites you to play
+      <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
     </div>
-
-    <div class="container">
-        <div>
-            <img src="" class="img-rounded" alt="avatar" id="avatar">
-            <label for="pwd" id="nickname"></label>
-        </div>
-        <div>
-            <label>MMR : </label>
-            <label for="pwd" id="mmr"></label>
-        </div>
-        <div>
-            <label>Leaderboard Rank : </label>
-            <label for="pwd" id="leaderboardRank"></label>
-        </div>
+    <div class="alert alert-success">
+      <strong>Team Liquid </strong> invites you to play
+      <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
+  <div class="container">
+    <div>
+      <img src="" class="img-rounded" alt="avatar" id="avatar">
+      <label for="pwd" id="nickname"></label>
+    </div>
+    <div>
+      <label>MMR : </label>
+      <label for="pwd" id="mmr"></label>
+    </div>
+    <div>
+      <label>Leaderboard Rank : </label>
+      <label for="pwd" id="leaderboardRank"></label>
+    </div>
+  </div>
 
-    <script>
-        axios.get('http://localhost:3000/steam/getProfile/76561198065514372')
-        .then(function(success){
-            let imgSrc = success.data.response.players[0].avatarfull
-            let nick = success.data.response.players[0].personaname
-            $("#avatar").attr("src", imgSrc)
-            $("#nickname").text(nick)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-        axios.get('http://localhost:3000/dota/getDotaProfile/105248644')
-        .then(function(success){
-            let mmr = success.data.mmr_estimate.estimate
-            let leaderboard_rank = success.data.leaderboard_rank
-            $("#mmr").text(mmr)
-            $("#leaderboardRank").text(leaderboard_rank)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+  <script>
+    axios.get('http://localhost:3000/steam/getProfile/76561198065514372')
+      .then(function(success) {
+        let imgSrc = success.data.response.players[0].avatarfull
+        let nick = success.data.response.players[0].personaname
+        $("#avatar").attr("src", imgSrc)
+        $("#nickname").text(nick)
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+    axios.get('http://localhost:3000/dota/getDotaProfile/105248644')
+      .then(function(success) {
+        let mmr = success.data.mmr_estimate.estimate
+        let leaderboard_rank = success.data.leaderboard_rank
+        $("#mmr").text(mmr)
+        $("#leaderboardRank").text(leaderboard_rank)
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+  </script>
 </body>
+
 </html>

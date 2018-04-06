@@ -1,23 +1,23 @@
 const User = require('../models/user')
 
 module.exports = {
-  getAll: (req,res)=>{
+  getAll: (req, res) => {
     User.find()
-      .then(data=>{
+      .then(data => {
         res.status(200).json({
           message: `All User Data`,
           data: data
         })
       })
-      .catch(err=>{
+      .catch(err => {
         res.status(500).json({
           message: `Error`
         })
       })
   },
-  register: (req,res)=>{
+  register: (req, res) => {
     let obj = {
-      
+
     }
     console.log(req.body)
   }
