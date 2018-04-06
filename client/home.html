@@ -19,7 +19,7 @@
                     <li><a href="#">My Teams</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
+                    <li><a href="#" id="loginUser"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                     </ul>
                 </div>
@@ -42,16 +42,47 @@
     </div>
 
     <div class="container">
-        <form action="">
-                <img src="http://liquipedia.net/commons/images/2/27/Divine_rapier_hi_res.png" class="img-rounded" alt="Cinque Terre">
-                <label for="pwd">Some Details: </label>
-                    <input type="text" class="form-control" id="dotaId">
-                <label for="pwd">Some Details: </label>
-                    <input type="text" class="form-control" id="dotaId">
-                <label for="pwd">Some Details: </label>
-                    <input type="text" class="form-control" id="dotaId">
-            </form>
+        <div>
+            <img src="" class="img-rounded" alt="avatar" id="avatar">
+            <label for="pwd" id="nickname"></label>
+        </div>
+        <div>
+            <label>MMR : </label>
+            <label for="pwd" id="mmr"></label>
+        </div>
+        <div>
+            <label>Leaderboard Rank : </label>
+            <label for="pwd" id="leaderboardRank"></label>
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+    <script>
+        axios.get('http://localhost:3000/steam/getProfile/76561198065514372')
+        .then(function(success){
+            let imgSrc = success.data.response.players[0].avatarfull
+            let nick = success.data.response.players[0].personaname
+            $("#avatar").attr("src", imgSrc)
+            $("#nickname").text(nick)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+        axios.get('http://localhost:3000/dota/getDotaProfile/105248644')
+        .then(function(success){
+            let mmr = success.data.mmr_estimate.estimate
+            let leaderboard_rank = success.data.leaderboard_rank
+            $("#mmr").text(mmr)
+            $("#leaderboardRank").text(leaderboard_rank)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+    </script>
 </body>
 </html>
