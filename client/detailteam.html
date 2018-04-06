@@ -11,20 +11,26 @@
 </head>
 
 <body>
-  <div class="container">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">5 Rookie</a>
+
+    <div class="container">
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                        <a class="navbar-brand">5 Rookie</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                        <li class="active"><a href="./home.html">Home</a></li>
+                        <li><a href="./myteams.html">My Teams</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                        </ul>
+                    </div>
+            </nav>
         </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">My Teams</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-        </ul>
+       
+       
       </div>
     </nav>
   </div>
@@ -33,35 +39,31 @@
     <span class="border border-success">
             <p class="font-weight-bold">
                 Your Team Members
-            </p>
+      </p>
             <ul id="myList" class="list-group" >
-            </ul>
-    </span>
-    <div class="container">
-      <h3>Available Players in 5Rookie</h3>
-      <ul class="list-group1" id="ul1">
-        Position 1
-      </ul>
+            </ul>                
+            </span>
+        </div>
+    <div class="container" id="position 1">
+        <h3>Available Players in 5Rookie</h3>
+        <ul class="list-group" id="ul1"> 
+        </ul>        
     </div>
-    <div class="container">
-      <ul class="list-group2" id="ul2">
-        Position 2
-      </ul>
+    <div class="container" id="position 2">
+        <ul class="list-group" id="ul2">
+        </ul>
     </div>
-    <div class="container">
-      <ul class="list-group3" id="ul3">
-        Position 3
-      </ul>
+    <div class="container" id="position 3">
+        <ul class="list-group" id="ul3">
+        </ul>
     </div>
-    <div class="container">
-      <ul class="list-group4" id="ul4">
-        Position 4
-      </ul>
+    <div class="container" id="position 4">
+        <ul class="list-group" id="ul4">
+        </ul>
     </div>
-    <div class="container">
-      <ul class="list-group5" id="ul5">
-        Position 5
-      </ul>
+    <div class="container" id="position 5">
+        <ul class="list-group" id="ul5">
+        </ul>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -106,25 +108,26 @@
         .catch(err => {
           console.log(err)
         })
-      axios.get('http://localhost:3000/team', {
-          teamId: teamId
-        })
-        .then(response => {
-          let ul = document.querySelector('ul')
-          response.data.data.forEach(datanew => {
-            //  console.log(data)
-            // ul.append('<li>'+datanew.teamName+'</li>')
-            var node = document.createElement("LI");
-            // Create a <li> node
-            node.classList.add("list-group-item")
-            var textnode = document.createTextNode(datanew.teamName); // Create a text node
-            node.appendChild(textnode); // Append the text to <li>
-            document.getElementById("myList").appendChild(node);
-          })
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      
+      axios.get('http://localhost:3000/team/'+localStorage.getItem('idteam'))
+                  .then(response => {
+                    let ul = document.querySelector('ul')
+
+                     response.data.data.teamMember.forEach(datanew=>{
+                      //  console.log(data)
+                        // ul.append('<li>'+datanew.teamName+'</li>')\
+                        console.log(response)
+                        var node = document.createElement("LI");     
+                                    // Create a <li> node
+                        node.classList.add("list-group-item")                
+                        var textnode = document.createTextNode(datanew.name);         // Create a text node
+                        node.appendChild(textnode);                              // Append the text to <li>
+                        document.getElementById("myList").appendChild(node); 
+                     })
+                  })
+                  .catch( (error)=> {
+                    console.log(error);
+                  });
     </script>
 </body>
 

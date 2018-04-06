@@ -10,28 +10,45 @@
 </head>
 
 <body>
-  <div class="container">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">5 Rookie</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">My Teams</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="loginUser"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+    <div class="container">
+        <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    <a class="navbar-brand">5 Rookie</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">My Teams</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" id="loginUser"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
+                    <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    </ul>
+                </div>
+        </nav>
+    </div>
 
-  <div class="container">
-    <div class="alert alert-success">
-      <strong>Team Liquid </strong> invites you to play
-      <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
+    <div class="container" id="notification">
+
+    </div>
+
+    <div class="container">
+        <div>
+            <img src="" class="img-rounded" alt="avatar" id="avatar">
+        </div>
+        <br>
+        <div>
+            <label>Nickname : </label>
+            <label for="pwd" id="nickname"</label>
+        </div>
+        <div>
+            <label>MMR : </label>
+            <label for="pwd" id="mmr"></label>
+        </div>
+        <div>
+            <label>Leaderboard Rank : </label>
+            <label for="pwd" id="leaderboardRank"></label>
+        </div>
     </div>
     <div class="alert alert-success">
       <strong>Team Liquid </strong> invites you to play
@@ -58,10 +75,153 @@
     </div>
   </div>
 
+
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
   <script>
+    function logout(){
+            localStorage.removeItem('token')
+            window.location.href = "index.html"
+        }
+        
+        function updateData(getId){
+            axios.get(`http://localhost:3000/users/accept/${getId}`)
+                 .then(response=>{
+                     console.log(response)
+                     alert('accepted')
+                     window.location.href="home.html"
+                 })
+        }
+
+        function rejectData(getId){
+            axios.get(`http://localhost:3000/users/reject/${getId}`)
+                 .then(response=>{
+                     console.log(response)
+                     alert('rejected')
+                     window.location.href="home.html"
+                 })
+        }
+        // axios.get("http://localhost:3000/users/home",{},{})
+        //      .then(data=>{
+
+        //      })
+        // let getNotif =$('#notification')
+
+        
+        let token = localStorage.getItem('token')
+        axios.post("http://localhost:3000/users/token", {}, {headers: {token:token}})
+             .then(function(response){
+
+                 let userId = response.data.result._id
+                 let dotaId = response.data.result.dotaId
+                 axios.get(`http://localhost:3000/dota/getDotaProfile/${dotaId}`)
+                    .then(function(success){
+                        let mmr = success.data.mmr_estimate.estimate
+                        let leaderboard_rank = success.data.leaderboard_rank
+                        $("#mmr").text(mmr)
+                        $("#leaderboardRank").text(leaderboard_rank)
+                        let steamId =success.data.profile.steamid
+
+                        axios.get(`http://localhost:3000/steam/getProfile/${steamId}`)
+                            .then(function(success){
+                                let imgSrc = success.data.response.players[0].avatarfull
+                                let nick = success.data.response.players[0].personaname
+                                $("#avatar").attr("src", imgSrc)
+                                $("#nickname").text(nick)
+                            })
+                            .catch(function(err){
+                                console.log(err)
+                            })   
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+                axios.get(`http://localhost:3000/users/home/${userId}`)
+                    .then(data=>{
+                       
+                        data.data.datas.forEach(d => {
+                            
+                            let teamId = d.teamId.teamName
+                            console.log(d._id)
+                            var node = document.createElement("div");                 // Create a <li> node
+                            // node.setAttribute("id", "notifColumn")
+                            var textnode = document.createTextNode(teamId + ' invite you to play');         // Create a text node
+                         
+                            node.classList.add("alert")
+                            node.classList.add("alert-success")
+                   
+                            node.appendChild(textnode);                             
+                            document.getElementById("notification").appendChild(node);
+
+                             var acceptButton = document.createElement("BUTTON");
+                             var idAccept = document.createAttribute("id");
+                             var acceptText = document.createTextNode("ACCEPT");
+
+                             idAccept.value = d._id;
+                             acceptButton.appendChild(acceptText);
+                             acceptButton.setAttributeNode(idAccept);
+                             acceptButton.addEventListener('click', function() {
+                                updateData(d._id);
+                            });
+                            document.getElementById("notification").appendChild(acceptButton);
+
+                            var rejectButton = document.createElement("BUTTON");
+                            var idReject = document.createAttribute("id");
+                            var rejectText = document.createTextNode("REJECT");
+
+                             idReject.value = d._id;
+                             rejectButton.appendChild(rejectText);
+                             rejectButton.setAttributeNode(idReject);
+                             rejectButton.addEventListener('click', function() {
+                                rejectData(d._id);
+                            });
+                            document.getElementById("notification").appendChild(rejectButton);
+
+                        }); 
+                        
+                    })
+             })
+             .catch(err=>{
+                 console.log(err)
+             })
+        
+            
+    let token = localStorage.getItem('token')
+    axios.post("http://localhost:3000/users/token", {}, {
+        headers: {
+          token: token
+        }
+      })
+      .then(function(response) {
+        let dotaId = response.data.result.dotaId
+        axios.get(`http://localhost:3000/dota/getDotaProfile/${dotaId}`)
+          .then(function(success) {
+            let mmr = success.data.mmr_estimate.estimate
+            let leaderboard_rank = success.data.leaderboard_rank
+            $("#mmr").text(mmr)
+            $("#leaderboardRank").text(leaderboard_rank)
+            let steamId = success.data.profile.steamid
+
+            axios.get(`http://localhost:3000/steam/getProfile/${steamId}`)
+              .then(function(success) {
+                let imgSrc = success.data.response.players[0].avatarfull
+                let nick = success.data.response.players[0].personaname
+                $("#avatar").attr("src", imgSrc)
+                $("#nickname").text(nick)
+              })
+              .catch(function(err) {
+                console.log(err)
+              })
+          })
+          .catch(function(err) {
+            console.log(err)
+          })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    let dotaId = localStorage.getItem('token').
     axios.get('http://localhost:3000/steam/getProfile/76561198065514372')
       .then(function(success) {
         let imgSrc = success.data.response.players[0].avatarfull
@@ -83,6 +243,7 @@
         console.log(err)
       })
   </script>
+
 </body>
 
 </html>

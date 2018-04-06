@@ -8,7 +8,6 @@ Steam.SteamUser = new SteamUser(client);
 
 
 module.exports = {
-
   getDotaProfile: function(req, res) {
     var url = `https://api.opendota.com/api/players/${req.params.dotaId}`;
 

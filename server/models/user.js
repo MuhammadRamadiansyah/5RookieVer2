@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-let userSchema = mongoose.Schema({
+
+let userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'name cannot be empty']
@@ -21,9 +23,9 @@ let userSchema = mongoose.Schema({
         type: String,
         required: [true, 'stock cannot be empty']
     },
-    usernameSteam: {
+    dotaId: {
         type: String,
-        required: [true, 'usernameSteam cannot be empty']
+        required: [true, 'dotaId cannot be empty'] 
     }
 },{
     timestamps: true
