@@ -71,7 +71,7 @@ module.exports = {
                 user.findOne({email: response.email})
                     .exec()
                     .then(result=>{  
-                      
+                        console.log(result)
                         res.status(201).json({
                             response,
                             result
@@ -87,7 +87,7 @@ module.exports = {
 
         let getId = req.params.id
 
-        // var newUserId = mongoose.Types.ObjectId('5ac70dbdae3dcb14edb51879');
+        // var newUserId = mongoose.Types.ObjectId('5ac6eeacb116410fb425b9d0');
         // var newTeamId = mongoose.Types.ObjectId('5ac715b55ef2371c60af9316')
         // let newInvitiation = new invitation()
         // let newInv = {

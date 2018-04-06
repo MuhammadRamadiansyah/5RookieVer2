@@ -79,11 +79,6 @@
                      window.location.href="home.html"
                  })
         }
-        // axios.get("http://localhost:3000/users/home",{},{})
-        //      .then(data=>{
-
-        //      })
-        // let getNotif =$('#notification')
 
         
         let token = localStorage.getItem('token')
@@ -122,20 +117,19 @@
                             let teamId = d.teamId.teamName
                             console.log(d._id)
                             var node = document.createElement("div");                 // Create a <li> node
-                            // node.setAttribute("id", "notifColumn")
+                            node.setAttribute("id", "notifColumn")
                             var textnode = document.createTextNode(teamId + ' invite you to play');         // Create a text node
                          
                             node.classList.add("alert")
                             node.classList.add("alert-success")
-                   
                             node.appendChild(textnode);                             
                             document.getElementById("notification").appendChild(node);
 
                              var acceptButton = document.createElement("BUTTON");
-                             var idAccept = document.createAttribute("id");
+                             var idAccept = document.createAttribute("class");
                              var acceptText = document.createTextNode("ACCEPT");
 
-                             idAccept.value = d._id;
+                             idAccept.value = 'btn btn-primary';
                              acceptButton.appendChild(acceptText);
                              acceptButton.setAttributeNode(idAccept);
                              acceptButton.addEventListener('click', function() {
@@ -144,10 +138,10 @@
                             document.getElementById("notification").appendChild(acceptButton);
 
                             var rejectButton = document.createElement("BUTTON");
-                            var idReject = document.createAttribute("id");
+                            var idReject = document.createAttribute("class");
                             var rejectText = document.createTextNode("REJECT");
 
-                             idReject.value = d._id;
+                             idReject.value = 'btn btn-danger';
                              rejectButton.appendChild(rejectText);
                              rejectButton.setAttributeNode(idReject);
                              rejectButton.addEventListener('click', function() {
