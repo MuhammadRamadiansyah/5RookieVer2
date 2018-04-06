@@ -59,10 +59,38 @@ module.exports = {
               newData,
               decoded
             })
-          })
-      }
-    })
-  },
+
+        });
+    },
+    register: function(req, res){
+        
+   
+        let secretKey = process.env.rahasia
+        let token = req.headers.token
+       
+        jwt.verify(token, secretKey, function(err, decoded) {
+            if(err){
+                console.log('err')
+            }else{
+                let newData = {
+                    name: decoded.name,
+                    position: req.body.position,
+                    dotaId: req.body.dotaId,
+                    email: decoded.email,
+                }
+                let newUser = new user(newData)
+                newUser.save()
+                        .then(newUser=>{
+                            res.status(201).json({
+                                newData,
+                                decoded
+                            })
+                        })
+                
+            }  
+        })
+        
+    },
   giveToken: function(req, res) {
     let token = req.headers.token
     let secretKey = process.env.rahasia
@@ -84,7 +112,6 @@ module.exports = {
             console.log('errorrr')
           })
 
-
         let token = req.headers.token
         let secretKey = process.env.rahasia
         
@@ -95,7 +122,7 @@ module.exports = {
                 user.findOne({email: response.email})
                     .exec()
                     .then(result=>{  
-                      
+                        console.log(result)
                         res.status(201).json({
                             response,
                             result
@@ -111,7 +138,7 @@ module.exports = {
 
         let getId = req.params.id
 
-        // var newUserId = mongoose.Types.ObjectId('5ac70dbdae3dcb14edb51879');
+        // var newUserId = mongoose.Types.ObjectId('5ac6eeacb116410fb425b9d0');
         // var newTeamId = mongoose.Types.ObjectId('5ac715b55ef2371c60af9316')
         // let newInvitiation = new invitation()
         // let newInv = {
