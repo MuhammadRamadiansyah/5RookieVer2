@@ -18,6 +18,6 @@ let invitationSchema = new Schema({
     timestamps: true
 })
 
-let Invitation = mongoose.model('Invitations', userSchema)
+let Invitation = mongoose.model('Invitations', invitationSchema)
 
 module.exports = Invitation
