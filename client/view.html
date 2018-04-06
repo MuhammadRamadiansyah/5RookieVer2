@@ -10,12 +10,13 @@
   <script src="./lib/script.js"></script>
 </head>
 
+<<<<<<< HEAD
 <body>
   <p></p>
   <ul id="myList">
   </ul>
   <script>
-      axios.get('http://localhost:3000/team')
+    axios.get('http://localhost:3000/team')
       .then(response => {
         let ul = document.querySelector('ul')
         response.data.data.forEach(datanew => {
@@ -31,6 +32,24 @@
         console.log(error);
       });
   </script>
+=======
+    axios.get('http://localhost:3000/team')
+    .then(response => {
+    let ul = document.querySelector('ul')
+     response.data.data.forEach(datanew=>{
+      //  console.log(data)
+        // ul.append('<li>'+datanew.teamName+'</li>')
+        var node = document.createElement("LI");                 // Create a <li> node
+        var textnode = document.createTextNode(datanew.teamName);         // Create a text node
+        node.appendChild(textnode);                              // Append the text to <li>
+        document.getElementById("myList").appendChild(node); 
+     })
+  })
+  .catch( (error)=> {
+    console.log(error);
+  });
+     </script>   
+>>>>>>> team
 </body>
 
 </html>

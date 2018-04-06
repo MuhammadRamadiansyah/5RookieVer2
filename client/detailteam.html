@@ -12,20 +12,25 @@
 
 <body>
 
-  <div class="container">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">5 Rookie</a>
+    <div class="container">
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                        <a class="navbar-brand">5 Rookie</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                        <li class="active"><a href="./home.html">Home</a></li>
+                        <li><a href="./myteams.html">My Teams</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                        </ul>
+                    </div>
+            </nav>
         </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">My Teams</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-        </ul>
+       
+       
       </div>
     </nav>
   </div>
@@ -34,85 +39,96 @@
     <span class="border border-success">
             <p class="font-weight-bold">
                 Your Team Members
-            </p>
-
+      </p>
             <ul id="myList" class="list-group" >
-
-            </ul>
-    </span>
-  <div class="container" id="position 1">
-    <h3>Available Players in 5Rookie</h3>
-    <ul class="list-group">
-      <li class="list-group-item">Position 1: Richo <a href="" class="btn btn-primary">invite</a></li>
-      <li class="list-group-item">Position 2: Ricky</li>
-      <li class="list-group-item">Position 3: Rio</li>
-      <li class="list-group-item">Position 4: Andy</li>
-      <li class="list-group-item">Position 5: Bong</li>
-    </ul>
-  </div>
-  <div class="container" id="position 2">
-    <ul class="list-group">
-      <li class="list-group-item">Position 1: Richo</li>
-      <li class="list-group-item">Position 2: Ricky</li>
-      <li class="list-group-item">Position 3: Rio</li>
-      <li class="list-group-item">Position 4: Andy</li>
-      <li class="list-group-item">Position 5: Bong</li>
-    </ul>
-  </div>
-  <div class="container" id="position 3">
-    <ul class="list-group">
-      <li class="list-group-item">Position 1: Richo</li>
-      <li class="list-group-item">Position 2: Ricky</li>
-      <li class="list-group-item">Position 3: Rio</li>
-      <li class="list-group-item">Position 4: Andy</li>
-      <li class="list-group-item">Position 5: Bong</li>
-    </ul>
-  </div>
-  <div class="container" id="position 4">
-    <ul class="list-group">
-      <li class="list-group-item">Position 1: Richo</li>
-      <li class="list-group-item">Position 2: Ricky</li>
-      <li class="list-group-item">Position 3: Rio</li>
-      <li class="list-group-item">Position 4: Andy</li>
-      <li class="list-group-item">Position 5: Bong</li>
-    </ul>
-  </div>
-  <div class="container" id="position 5">
-    <ul class="list-group">
-      <li class="list-group-item">Position 1: Richo</li>
-      <li class="list-group-item">Position 2: Ricky</li>
-      <li class="list-group-item">Position 3: Rio</li>
-      <li class="list-group-item">Position 4: Andy</li>
-      <li class="list-group-item">Position 5: Bong</li>
-    </ul>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-  <script>
-    axios.get('http://localhost:3000/users')
-      .then(response => {
-        console.log(response)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    axios.get('http://localhost:3000/team')
-      .then(response => {
-        let ul = document.querySelector('ul')
-        response.data.data.forEach(datanew => {
-          //  console.log(data)
-          // ul.append('<li>'+datanew.teamName+'</li>')
-          var node = document.createElement("LI");
-          // Create a <li> node
-          node.classList.add("list-group-item")
-          var textnode = document.createTextNode(datanew.teamName); // Create a text node
-          node.appendChild(textnode); // Append the text to <li>
-          document.getElementById("myList").appendChild(node);
+            </ul>                
+            </span>
+        </div>
+    <div class="container" id="position 1">
+        <h3>Available Players in 5Rookie</h3>
+        <ul class="list-group" id="ul1"> 
+        </ul>        
+    </div>
+    <div class="container" id="position 2">
+        <ul class="list-group" id="ul2">
+        </ul>
+    </div>
+    <div class="container" id="position 3">
+        <ul class="list-group" id="ul3">
+        </ul>
+    </div>
+    <div class="container" id="position 4">
+        <ul class="list-group" id="ul4">
+        </ul>
+    </div>
+    <div class="container" id="position 5">
+        <ul class="list-group" id="ul5">
+        </ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+      let teamId = localStorage.getItem('teamId')
+      let position1 = document.getElementById("ul1")
+      let position2 = document.getElementById("ul2")
+      let position3 = document.getElementById("ul3")
+      let position4 = document.getElementById("ul4")
+      let position5 = document.getElementById("ul5")
+      axios.get('http://localhost:3000/users')
+        .then(response => {
+          response.forEach(user=>{
+            let li = document.createElement('li')
+            li.classList.add("list-group-item")
+            let button = document.createElement('button')
+            button.classList.add("btn-primary")
+            button.innerHTML = "Invite"
+            if(user.position == '1'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position1.appendChild(li)
+            } else if(user.position == '2'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position2.appendChild(li)
+            } else if(user.position == '3'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position3.appendChild(li)
+            } else if(user.position == '4'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position4.appendChild(li)
+            } else if(user.position == '5'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position5.appendChild(li)
+            }
+          })
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  </script>
+        .catch(err => {
+          console.log(err)
+        })
+      
+      axios.get('http://localhost:3000/team/'+localStorage.getItem('idteam'))
+                  .then(response => {
+                    let ul = document.querySelector('ul')
+
+                     response.data.data.teamMember.forEach(datanew=>{
+                      //  console.log(data)
+                        // ul.append('<li>'+datanew.teamName+'</li>')\
+                        console.log(response)
+                        var node = document.createElement("LI");     
+                                    // Create a <li> node
+                        node.classList.add("list-group-item")                
+                        var textnode = document.createTextNode(datanew.name);         // Create a text node
+                        node.appendChild(textnode);                              // Append the text to <li>
+                        document.getElementById("myList").appendChild(node); 
+                     })
+                  })
+                  .catch( (error)=> {
+                    console.log(error);
+                  });
+    </script>
 </body>
 
 </html>

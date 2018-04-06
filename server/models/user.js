@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 
-let userSchema = mongoose.Schema({
+let userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'name cannot be empty']

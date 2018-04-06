@@ -11,7 +11,10 @@ axios({
 function shareTweet() {
     $.ajax({
         method: "POST",
-        url : "http://localhost:3000/api/share-twitter"
+        url : "http://localhost:3000/api/share-twitter",
+        data: {
+          "team": document.getElementById("teamName").value
+        }
     })
     .done(function(dataShare) {
       console.log(dataShare)

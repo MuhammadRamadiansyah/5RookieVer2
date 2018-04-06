@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container">
         <nav class="navbar navbar-inverse">
@@ -48,16 +50,37 @@
             <label for="pwd" id="leaderboardRank"></label>
         </div>
     </div>
+    <div class="alert alert-success">
+      <strong>Team Liquid </strong> invites you to play
+      <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
+    </div>
+    <div class="alert alert-success">
+      <strong>Team Liquid </strong> invites you to play
+      <a href="" class="btn btn-primary">Confirm</a> <a href="" class="btn btn-danger">Reject</a>
+    </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
+  <div class="container">
+    <div>
+      <img src="" class="img-rounded" alt="avatar" id="avatar">
+      <label for="pwd" id="nickname"></label>
+    </div>
+    <div>
+      <label>MMR : </label>
+      <label for="pwd" id="mmr"></label>
+    </div>
+    <div>
+      <label>Leaderboard Rank : </label>
+      <label for="pwd" id="leaderboardRank"></label>
+    </div>
+  </div>
 
-    <script>
 
-        function logout(){
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script>
+    function logout(){
             localStorage.removeItem('token')
             window.location.href = "index.html"
         }
@@ -158,6 +181,63 @@
              })
         
             
-    </script>
+    let token = localStorage.getItem('token')
+    axios.post("http://localhost:3000/users/token", {}, {
+        headers: {
+          token: token
+        }
+      })
+      .then(function(response) {
+        let dotaId = response.data.result.dotaId
+        axios.get(`http://localhost:3000/dota/getDotaProfile/${dotaId}`)
+          .then(function(success) {
+            let mmr = success.data.mmr_estimate.estimate
+            let leaderboard_rank = success.data.leaderboard_rank
+            $("#mmr").text(mmr)
+            $("#leaderboardRank").text(leaderboard_rank)
+            let steamId = success.data.profile.steamid
+
+            axios.get(`http://localhost:3000/steam/getProfile/${steamId}`)
+              .then(function(success) {
+                let imgSrc = success.data.response.players[0].avatarfull
+                let nick = success.data.response.players[0].personaname
+                $("#avatar").attr("src", imgSrc)
+                $("#nickname").text(nick)
+              })
+              .catch(function(err) {
+                console.log(err)
+              })
+          })
+          .catch(function(err) {
+            console.log(err)
+          })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    let dotaId = localStorage.getItem('token').
+    axios.get('http://localhost:3000/steam/getProfile/76561198065514372')
+      .then(function(success) {
+        let imgSrc = success.data.response.players[0].avatarfull
+        let nick = success.data.response.players[0].personaname
+        $("#avatar").attr("src", imgSrc)
+        $("#nickname").text(nick)
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+    axios.get('http://localhost:3000/dota/getDotaProfile/105248644')
+      .then(function(success) {
+        let mmr = success.data.mmr_estimate.estimate
+        let leaderboard_rank = success.data.leaderboard_rank
+        $("#mmr").text(mmr)
+        $("#leaderboardRank").text(leaderboard_rank)
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+  </script>
+
 </body>
+
 </html>

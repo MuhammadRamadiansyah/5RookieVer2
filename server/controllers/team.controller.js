@@ -1,43 +1,62 @@
 const Team = require('../models/team')
+const User = require('../models/user')
 
 module.exports = {
 
-getAll : function(req,res){
+  getAll: function(req, res) {
 
     Team.find()
-    .populate('user')
     .exec().then(response=>{
         res.status(200).json({
         message : 'success get data',
-        data : response
+        data : response  
+
     })
     }).catch(err=>{
         res.status(500).json({
-        message : 'get data failed',
-        err
-          })
+          message: 'get data failed',
+          err
         })
+      })
+  },
+
+    getOne : function(req,res){
+      Team.findById(req.params.id)
+      .populate('teamMember')
+      .exec().then(response=>{
+        
+        
+        res.status(200).json({
+          message : 'success get data by id',
+          data : response
+        })
+      }).catch(err=>{
+        res.status(500).json({
+          message : 'get data by id failed',
+          err
+        })
+      })
     },
 
 
-add : function(req,res){
+  add: function(req, res) {
 
     let newTeam = new Team({
-      teamName : req.body.teamName,
-      // captain : req.body.captain,
-      // author : req.body.author,
-      // category : req.body.category,
-      // stock : req.body.stock,
+      teamName: req.body.teamName,
+      captain: req.body.captain,
+      author: req.body.author,
+      category: req.body.category,
+      stock: req.body.stock,
     })
 
-    newTeam.save().then(response=>{
+    Team.save().then(response => {
       res.status(200).json({
-        message : 'success insert data',
-        data : response
+        message: 'success insert data',
+        data: response
       })
-    }).catch(err=>{
+    }).catch(err => {
       res.status(500).json({
-        message : 'insert error',
+        message: 'insert error',
         err
       })
     })
