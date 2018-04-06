@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Detail Team</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 </head>
 <body>
 
@@ -32,14 +33,30 @@
             <p class="font-weight-bold">
                 Your Team Members
             </p>
-
-            <ul class="list-group">
-                    <li class="list-group-item">Position 1: Richo</li>
-                    <li class="list-group-item">Position 2: Ricky</li>
-                    <li class="list-group-item">Position 3: Rio</li>
-                    <li class="list-group-item">Position 4: Andy</li>
-                    <li class="list-group-item">Position 5: Bong</li>
+            
+            <ul id="myList" class="list-group" >
+           
             </ul>
+            <script>
+
+                    axios.get('http://localhost:3000/team')
+                  .then(response => {
+                    let ul = document.querySelector('ul')
+                     response.data.data.forEach(datanew=>{
+                      //  console.log(data)
+                        // ul.append('<li>'+datanew.teamName+'</li>')
+                        var node = document.createElement("LI");     
+                                    // Create a <li> node
+                        node.classList.add("list-group-item")                
+                        var textnode = document.createTextNode(datanew.teamName);         // Create a text node
+                        node.appendChild(textnode);                              // Append the text to <li>
+                        document.getElementById("myList").appendChild(node); 
+                     })
+                  })
+                  .catch( (error)=> {
+                    console.log(error);
+                  });
+            </script>     
                 
             </span>
         </div>
