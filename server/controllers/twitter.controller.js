@@ -2,6 +2,7 @@ const OAuth = require('oauth')
 
 module.exports = {
     shareTwitter: (req, res) => {
+        // console.log(req.body)
         const oauth = new OAuth.OAuth(
             'https://api.twitter.com/oauth/request_token',
             'https://api.twitter.com/oauth/access_token',
@@ -17,7 +18,7 @@ module.exports = {
             process.env.ACCESS_TOKEN, 
             process.env.ACCESS_TOKEN_SECRET,
             {
-                status: `I need a team to play dota... Let's join the click link below.. \nhttps://store.steampowered.com/join/`
+                status: `I need a team to play dota...with "${req.body.team}" is My Team's....Let's join the click link below.. \nhttps://store.steampowered.com/join/`
                 
             },
 

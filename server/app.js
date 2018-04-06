@@ -15,7 +15,7 @@ var dotaRouter = require('./routes/dota')
 const mongoose =require ('mongoose')
 mongoose.connect('mongodb://localhost/db_rookie_ver2');
 
-require('dotenv').load()
+require('dotenv').config()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
