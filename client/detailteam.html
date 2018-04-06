@@ -106,25 +106,25 @@
         .catch(err => {
           console.log(err)
         })
-      // axios.get('http://localhost:3000/team', {
-      //     teamId: teamId
-      //   })
-      //   .then(response => {
-      //     let ul = document.querySelector('ul')
-      //     response.data.data.forEach(datanew => {
-      //       //  console.log(data)
-      //       // ul.append('<li>'+datanew.teamName+'</li>')
-      //       var node = document.createElement("LI");
-      //       // Create a <li> node
-      //       node.classList.add("list-group-item")
-      //       var textnode = document.createTextNode(datanew.teamName); // Create a text node
-      //       node.appendChild(textnode); // Append the text to <li>
-      //       document.getElementById("myList").appendChild(node);
-      //     })
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      axios.get('http://localhost:3000/team', {
+          teamId: teamId
+        })
+        .then(response => {
+          let ul = document.querySelector('ul')
+          response.data.data.forEach(datanew => {
+            //  console.log(data)
+            // ul.append('<li>'+datanew.teamName+'</li>')
+            var node = document.createElement("LI");
+            // Create a <li> node
+            node.classList.add("list-group-item")
+            var textnode = document.createTextNode(datanew.teamName); // Create a text node
+            node.appendChild(textnode); // Append the text to <li>
+            document.getElementById("myList").appendChild(node);
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     </script>
 </body>
 
