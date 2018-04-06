@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
   <div class="container">
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -38,80 +37,75 @@
             <ul id="myList" class="list-group" >
             </ul>
     </span>
-    <div class="container" id="position 1">
+    <div class="container">
       <h3>Available Players in 5Rookie</h3>
-      <ul class="list-group">
-        <li class="list-group-item">Position 1: Richo <a href="" class="btn btn-primary">invite</a></li>
-        <li class="list-group-item">Position 2: Ricky</li>
-        <li class="list-group-item">Position 3: Rio</li>
-        <li class="list-group-item">Position 4: Andy</li>
-        <li class="list-group-item">Position 5: Bong</li>
+      <ul class="list-group1" id="ul1">
+        Position 1
       </ul>
     </div>
-    <div class="container" id="position 2">
-      <ul class="list-group">
-        <li class="list-group-item">Position 1: Richo</li>
-        <li class="list-group-item">Position 2: Ricky</li>
-        <li class="list-group-item">Position 3: Rio</li>
-        <li class="list-group-item">Position 4: Andy</li>
-        <li class="list-group-item">Position 5: Bong</li>
+    <div class="container">
+      <ul class="list-group2" id="ul2">
+        Position 2
       </ul>
     </div>
-    <div class="container" id="position 3">
-      <ul class="list-group">
-        <li class="list-group-item">Position 1: Richo</li>
-        <li class="list-group-item">Position 2: Ricky</li>
-        <li class="list-group-item">Position 3: Rio</li>
-        <li class="list-group-item">Position 4: Andy</li>
-        <li class="list-group-item">Position 5: Bong</li>
+    <div class="container">
+      <ul class="list-group3" id="ul3">
+        Position 3
       </ul>
     </div>
-    <div class="container" id="position 4">
-      <ul class="list-group">
-        <li class="list-group-item">Position 1: Richo</li>
-        <li class="list-group-item">Position 2: Ricky</li>
-        <li class="list-group-item">Position 3: Rio</li>
-        <li class="list-group-item">Position 4: Andy</li>
-        <li class="list-group-item">Position 5: Bong</li>
+    <div class="container">
+      <ul class="list-group4" id="ul4">
+        Position 4
       </ul>
     </div>
-    <div class="container" id="position 5">
-      <ul class="list-group">
-        <li class="list-group-item">Position 1: Richo</li>
-        <li class="list-group-item">Position 2: Ricky</li>
-        <li class="list-group-item">Position 3: Rio</li>
-        <li class="list-group-item">Position 4: Andy</li>
-        <li class="list-group-item">Position 5: Bong</li>
+    <div class="container">
+      <ul class="list-group5" id="ul5">
+        Position 5
       </ul>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
       let teamId = localStorage.getItem('teamId')
-      let position1 = $('#position 1')
-      let position2 = $('#position 2')
-      let position3 = $('#position 3')
-      let position4 = $('#position 4')
-      let position5 = $('#position 5')
-      // axios.get('http://localhost:3000/users')
-      //   .then(response => {
-      //     response.forEach(user=>{
-      //       if(user.position = '1'){
-      //         $('.list-group')
-      //       } else if(user.position = '2'){
-      //
-      //       } else if(user.position = '3'){
-      //
-      //       } else if(user.position = '4'){
-      //
-      //       } else if(user.position = '5'){
-      //
-      //       }
-      //     })
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
+      let position1 = document.getElementById("ul1")
+      let position2 = document.getElementById("ul2")
+      let position3 = document.getElementById("ul3")
+      let position4 = document.getElementById("ul4")
+      let position5 = document.getElementById("ul5")
+      axios.get('http://localhost:3000/users')
+        .then(response => {
+          response.forEach(user=>{
+            let li = document.createElement('li')
+            li.classList.add("list-group-item")
+            let button = document.createElement('button')
+            button.classList.add("btn-primary")
+            button.innerHTML = "Invite"
+            if(user.position == '1'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position1.appendChild(li)
+            } else if(user.position == '2'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position2.appendChild(li)
+            } else if(user.position == '3'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position3.appendChild(li)
+            } else if(user.position == '4'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position4.appendChild(li)
+            } else if(user.position == '5'){
+              li.innerText = `${user.name} `
+              li.appendChild(button)
+              position5.appendChild(li)
+            }
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
       // axios.get('http://localhost:3000/team', {
       //     teamId: teamId
       //   })

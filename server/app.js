@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var request = require('request');
 
+const User = require('./models/user')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
