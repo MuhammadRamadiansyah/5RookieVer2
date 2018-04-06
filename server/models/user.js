@@ -23,12 +23,12 @@ let userSchema = mongoose.Schema({
     },
     usernameSteam: {
         type: String,
-        required: [true, 'usernameSteam cannot be empty'] 
+        required: [true, 'usernameSteam cannot be empty']
     }
 },{
     timestamps: true
 })
 
-let user = mongoose.model('users', userSchema)
+let User = mongoose.model('Users', userSchema)
 
-module.exports = user
+module.exports = User

@@ -3,13 +3,13 @@ const Team = require('../models/team')
 module.exports = {
 
 getAll : function(req,res){
-    
+
     Team.find()
     .populate('user')
     .exec().then(response=>{
         res.status(200).json({
         message : 'success get data',
-        data : response  
+        data : response
     })
     }).catch(err=>{
         res.status(500).json({
