@@ -50,8 +50,8 @@ module.exports = {
         );
         oauth.get(
             `https://api.twitter.com/1.1/application/rate_limit_status.json?resources=help,users,search,statuses`,
-            "2265132955-qOkF1FQcGNAzNlUobShsaS3S4Bkd86qd8sXyOYk",             
-            "N8DGunFW9fAsLnJwM6jdxMGgDg4Lmwy0G0e9KY8NKXrCL", 
+            process.env.ACCESS_TOKEN,             
+            process.env.ACCESS_TOKEN_SECRET, 
 
             function (err, data, response) {
                 if(err){

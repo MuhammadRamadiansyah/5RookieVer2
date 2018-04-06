@@ -3,13 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+const cors = require('cors')
+require('dotenv').config()
 var request = require('request');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
 var dotaRouter = require('./routes/dota')
-var cors = require('cors')
 const mongoose =require ('mongoose')
 mongoose.connect('mongodb://localhost/db_rookie_ver2');
 
@@ -20,7 +22,7 @@ var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
 var team = require('./routes/team');
 var app = express();
-app.use(cors())
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -30,6 +32,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(cors())
 
 app.use('/', indexRouter)
@@ -37,8 +44,6 @@ app.use('/users', usersRouter)
 app.use('/steam', steamRouter)
 app.use('/dota', dotaRouter)
 app.use('/team',team)
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
