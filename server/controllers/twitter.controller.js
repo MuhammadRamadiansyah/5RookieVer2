@@ -17,7 +17,7 @@ module.exports = {
             process.env.ACCESS_TOKEN, 
             process.env.ACCESS_TOKEN_SECRET,
             {
-                status: `I need a team to play dota... Let's join the click link below.. \nhttps://store.steampowered.com/join/`
+                status: `I need a team to play dota... Let's join the click link below.. \nhttp://localhost:8080/register.html`
                 
             },
 
