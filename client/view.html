@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script src="./lib/script.js"></script>
-</head>
-<body>
-    <p></p>
-    <script>
 
-    axios.get('http://localhost:3000/team')
-  .then(response => {
-     let p = document.querySelector('p')
-     p.textContent=response.data.data[0].teamName
-    console.log(response.data.data[0].teamName);
-  })
-  .catch( (error)=> {
-    console.log(error);
-  });
-     </script>   
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="./lib/script.js"></script>
+</head>
+
+<body>
+  <p></p>
+  <ul id="myList">
+  </ul>
+  <script>
+      axios.get('http://localhost:3000/team')
+      .then(response => {
+        let ul = document.querySelector('ul')
+        response.data.data.forEach(datanew => {
+          //  console.log(data)
+          // ul.append('<li>'+datanew.teamName+'</li>')
+          var node = document.createElement("LI"); // Create a <li> node
+          var textnode = document.createTextNode(datanew.teamName); // Create a text node
+          node.appendChild(textnode); // Append the text to <li>
+          document.getElementById("myList").appendChild(node);
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  </script>
 </body>
+
 </html>

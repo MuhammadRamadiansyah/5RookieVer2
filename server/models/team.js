@@ -8,17 +8,17 @@ let teamSChema = new mongoose.Schema({
     },
     captain: {
         type: String, //e.g: 1,2,3,4,5
-        required: [true, 'position cannot be empty']
+        // required: [true, 'position cannot be empty']
     },
-    teamMember: [{ 
+    teamMember: [{
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "Users"
     }]
 
 },{
     timestamps: true
 })
 
-let team = mongoose.model('teams', teamSChema)
+let Team = mongoose.model('Teams', teamSChema)
 
-module.exports = team
+module.exports = Team
