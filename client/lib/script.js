@@ -1,6 +1,6 @@
 axios({
     method:'get',
-    url:'http://bit.ly/2mTM3nY',
+    url:'',
     responseType:'stream'
   })
     .then(function(response) {
