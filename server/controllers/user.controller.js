@@ -4,6 +4,10 @@ var accessToken = FB.getAccessToken();
 const jwt = require('jsonwebtoken')
 const secretKey = process.env.rahasia
 const user = require('../models/user')
+const invitation = require('../models/invitation')
+const team = require('../models/team')
+
+
 const mongoose = require('mongoose');
 
 module.exports = {
@@ -69,7 +73,7 @@ module.exports = {
                 user.findOne({email: response.email})
                     .exec()
                     .then(result=>{  
-                        console.log('masuk')  
+                      
                         res.status(201).json({
                             response,
                             result
@@ -80,6 +84,82 @@ module.exports = {
                 
             }  
         })
-    }
+    },
+    getNotification: function(req, res){
+
+        let getId = req.params.id
+
+        // var newUserId = mongoose.Types.ObjectId('5ac70dbdae3dcb14edb51879');
+        // var newTeamId = mongoose.Types.ObjectId('5ac715b55ef2371c60af9316')
+        // let newInvitiation = new invitation()
+        // let newInv = {
+        //     userId: newUserId,
+        //     teamId: newTeamId,
+        //     status: 'pending'
+        // }
+
+        // let newInvitation = new invitation(newInv)
+        // newInvitation.save()
+        //              .then(datas=>{
+        //                 console.log(datas,'----------->')
+        //                 res.status(200).json({
+        //                   datas
+        //               })
+        //              })
+        //              .catch(err=>{
+        //                  console.log(err)
+        //              })
+    
+        invitation.find({userId: getId, status: 'pending'})
+                  .populate('teamId')
+                  .exec()
+                  .then(function(datas){
+                      console.log(datas,'----------->')
+                      res.status(200).json({
+                          datas
+                      })
+                  })
+                  .catch(err=>{
+                      console.log(err)
+                  })
+                  
+    },
+    accept: function(req, res){
+
+        let getId = req.params.id
+        let updateData = {
+            status: 'accept'
+        }
+        invitation.findOneAndUpdate({_id: getId}, updateData)
+                  .exec()
+                  .then(success=>{
+   
+                    let newData = {
+                        $push: {teamMember: success.userId}
+                    }
+                    team.findOneAndUpdate({_id: success.teamId}, newData)
+                        .then(result=>{
+                            res.status(200).json({
+                                success
+                            })
+                        })
+                  })
+    },
+    reject: function(req, res){
+
+        let getId = req.params.id
+        let updateData = {
+            status: 'reject'
+        }
+        invitation.findOneAndUpdate({_id: getId}, updateData)
+                  .exec()
+                  .then(success=>{
+                    res.status(200).json({
+                        success
+                    })
+                  })
+    },
+    
+
 }
 
