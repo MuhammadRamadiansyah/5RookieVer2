@@ -4,5 +4,4 @@ const router = express.Router()
 
 router.get('/',getAll)
 router.post('/add',add)
-
 module.exports = router

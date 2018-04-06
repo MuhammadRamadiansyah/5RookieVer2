@@ -8,7 +8,7 @@ let teamSChema = new mongoose.Schema({
     },
     captain: {
         type: String, //e.g: 1,2,3,4,5
-        required: [true, 'position cannot be empty']
+        // required: [true, 'position cannot be empty']
     },
     teamMember: [{
         type: Schema.Types.ObjectId,
