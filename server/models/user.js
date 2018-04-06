@@ -23,7 +23,7 @@ let userSchema = mongoose.Schema({
     },
     dotaId: {
         type: String,
-        required: [true, 'usernameSteam cannot be empty'] 
+        required: [true, 'dotaId cannot be empty'] 
     }
 },{
     timestamps: true

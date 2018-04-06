@@ -20,14 +20,13 @@
                 axios.post('http://localhost:3000/users/login', {}, {
                     headers: {tokenfb: response.authResponse.accessToken}
                 }).then((response)=>{
-                    console.log(response.data.response)
+               
                     localStorage.setItem('token', response.data.response.token)
-
-                    // if(response.data.checkDatabase){
-                    //     window.location.href="http://localhost:8080/home.html"
-                    // }else{
-                    //     window.location.href="home.html"
-                    // }
+                    if(response.data.userDatabase == null){
+                        window.location.href="register.html"
+                    }else{
+                        window.location.href="home.html"
+                    }
                  
                 }).catch((err)=>{
                     console.log('error')
