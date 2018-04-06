@@ -4,6 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var request = require('request');
+
+var cors = require('cors')
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var steamRouter = require('./routes/steam');
+var dotaRouter = require('./routes/dota')
 const mongoose =require ('mongoose')
 mongoose.connect('mongodb://localhost/db_rookie_ver2');
 
@@ -22,11 +28,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', indexRouter)
+app.use('/users', usersRouter)
 app.use('/steam', steamRouter)
+app.use('/dota', dotaRouter)
 app.use('/team',team)
+
 
 
 // catch 404 and forward to error handler
