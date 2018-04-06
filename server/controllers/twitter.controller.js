@@ -17,7 +17,7 @@ module.exports = {
             process.env.ACCESS_TOKEN, 
             process.env.ACCESS_TOKEN_SECRET,
             {
-                status: `I need a team to play dota... Let's join the click link below.. \nhttps://store.steampowered.com/join/`
+                status: `I need a team to play dota... Let's join the click link below.. \nhttp://localhost:8080/register.html`
                 
             },
 
@@ -35,5 +35,37 @@ module.exports = {
                 }
             }
         );
+    },
+
+    checkToken: (req, res) => {
+        // res.send('masuuuuk')
+        const oauth = new OAuth.OAuth(
+            'https://api.twitter.com/oauth/request_token',
+            'https://api.twitter.com/oauth/access_token',
+            process.env.CONSUMER_KEY,
+            process.env.CONSUMER_SECRET,
+            '1.0A',
+            null,
+            'HMAC-SHA1'
+        );
+        oauth.get(
+            `https://api.twitter.com/1.1/application/rate_limit_status.json?resources=help,users,search,statuses`,
+            "2265132955-qOkF1FQcGNAzNlUobShsaS3S4Bkd86qd8sXyOYk",             
+            "N8DGunFW9fAsLnJwM6jdxMGgDg4Lmwy0G0e9KY8NKXrCL", 
+
+            function (err, data, response) {
+                if(err){
+                    res.status(400).json({
+                        message: 'Get Data ERROR',
+                        error: err
+                    })
+                } else {
+                    res.status(200).json({
+                        message: 'Get Data Successed',
+                        data: JSON.parse(data)
+                    })
+                }
+            }
+        );  
     }
 }
