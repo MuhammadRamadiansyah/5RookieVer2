@@ -45,8 +45,6 @@ module.exports = {
                     position: req.body.position,
                     dotaId: req.body.dotaId,
                     email: decoded.email,
-                    nickname: 'tes',
-                    password: 'tes'
                 }
                 let newUser = new user(newData)
                 newUser.save()
