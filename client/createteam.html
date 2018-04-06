@@ -1,38 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Team</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Create Team</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 </head>
+
 <body>
 
-    <div class="container">
-            <nav class="navbar navbar-inverse">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                        <a class="navbar-brand">5 Rookie</a>
-                        </div>
-                        <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">My Teams</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                        </ul>
-                    </div>
-            </nav>
+  <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">5 Rookie</a>
         </div>
-        
+
     <div class="container">
         <form action="/action_page.php">
             <label for="pwd">Your team name: </label>
             <input type="text" class="form-control" id="teamName">
-          
+
             <input class="btn btn-default" name="submit" type="button" value="submit" onclick="submitData()" />
         </form>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -42,13 +33,13 @@
         </ul>
     </div>
 <script>
-    
-    
+
+
 //   axios.post('http://localhost:3000/team/add', {
 //     let data = JSON.stringify({
 //         teamName: document.getElementById("teamName")
-//     }) 
-   
+//     })
+
 //   })
 //   .then(function (response) {
 //     //console.log(response);
@@ -68,7 +59,51 @@ function submitData(){
      console.log(error);
   });
 }
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">My Teams</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span>Welcome</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
-</script>
+  <div class="container">
+    <form action="/action_page.php">
+      <label for="pwd">Your team name: </label>
+      <input type="text" class="form-control" id="teamName">
+
+      <input class="btn btn-default" name="submit" type="button" value="submit" onclick="submitData()" />
+    </form>
+  </div>
+  <script>
+    //   axios.post('http://localhost:3000/team/add', {
+    //     let data = JSON.stringify({
+    //         teamName: document.getElementById("teamName")
+    //     })
+
+    //   })
+    //   .then(function (response) {
+    //     //console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     //console.log(error);
+    //   });
+    function submitData() {
+      axios.post('http://localhost:3000/team/add', {
+          teamName: document.getElementById("teamName").value
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  </script>
 </body>
+
 </html>

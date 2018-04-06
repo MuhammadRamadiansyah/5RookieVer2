@@ -15,7 +15,7 @@
   <ul id="myList">
   </ul>
   <script>
-      axios.get('http://localhost:3000/team')
+    axios.get('http://localhost:3000/team')
       .then(response => {
         let ul = document.querySelector('ul')
         response.data.data.forEach(datanew => {
